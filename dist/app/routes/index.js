@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const pcPart_route_1 = require("../modules/pcPart/pcPart.route");
+const content_route_1 = require("../modules/content/content.route");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
-        path: '/pc-part',
-        route: pcPart_route_1.PcPartRoutes,
+        path: '/content',
+        route: content_route_1.ContentRoutes,
     },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));
