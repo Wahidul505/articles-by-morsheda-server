@@ -37,7 +37,10 @@ const getSingleContent = (id) => __awaiter(void 0, void 0, void 0, function* () 
     return content;
 });
 const getCategorizedContents = (category) => __awaiter(void 0, void 0, void 0, function* () {
-    const contents = yield content_model_1.Content.find({ category: category.toLowerCase() });
+    const contents = yield content_model_1.Content.find({
+        category: category.toLowerCase(),
+        status: 'active',
+    });
     return contents;
 });
 const postContent = (payload) => __awaiter(void 0, void 0, void 0, function* () {

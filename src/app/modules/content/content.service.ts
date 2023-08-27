@@ -33,7 +33,10 @@ const getSingleContent = async (id: string): Promise<IContent | null> => {
 const getCategorizedContents = async (
   category: string
 ): Promise<IContent[]> => {
-  const contents = await Content.find({ category: category.toLowerCase() });
+  const contents = await Content.find({
+    category: category.toLowerCase(),
+    status: 'active',
+  });
   return contents;
 };
 
