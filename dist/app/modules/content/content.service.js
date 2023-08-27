@@ -14,11 +14,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContentService = void 0;
 const content_model_1 = require("./content.model");
 const getAllContents = () => __awaiter(void 0, void 0, void 0, function* () {
-    const contents = yield content_model_1.Content.find().sort({ $natural: -1 });
+    const contents = yield content_model_1.Content.find({ status: 'active' }).sort({
+        $natural: -1,
+    });
     return contents;
 });
 const getLatestContents = () => __awaiter(void 0, void 0, void 0, function* () {
-    const contents = yield content_model_1.Content.aggregate([{ $sample: { size: 6 } }]);
+    const contents = yield content_model_1.Content.aggregate([
+        { $match: { status: 'active' } },
+        { $sample: { size: 6 } },
+    ]);
     return contents;
 });
 const getContentsByStatus = (status) => __awaiter(void 0, void 0, void 0, function* () {
