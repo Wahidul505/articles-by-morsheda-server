@@ -5,11 +5,16 @@ import { IContent } from './content.interface';
 import { Content } from './content.model';
 
 const getAllContents = async (): Promise<IContent[]> => {
-  const contents = await Content.find().sort({ $natural: -1 });
+  const contents = await Content.find({ status: 'active' }).sort({
+    $natural: -1,
+  });
   return contents;
 };
 const getLatestContents = async (): Promise<IContent[]> => {
-  const contents = await Content.aggregate([{ $sample: { size: 6 } }]);
+  const contents = await Content.aggregate([
+    { $match: { status: 'active' } },
+    { $sample: { size: 6 } },
+  ]);
   return contents;
 };
 
